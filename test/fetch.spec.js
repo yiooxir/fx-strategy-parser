@@ -1,8 +1,8 @@
+// process.env.NODE_ENV = 'tests';
+
+import './env';
 import should from 'should';
-import {fetchPageCount, fetchPageData} from '../utils';
-
-
-let dom;
+import {fetchPageCount, fetchPageData, start} from '../utils';
 
 describe('fetchPageCount', () => {
 
@@ -23,6 +23,16 @@ describe('fetchPageData', () => {
             console.log('******** page data. See: https://www.mql5.com/ru/signals/mt4 *****')
             err ? console.log(err) :
                   console.log('fetched data', data);
+            done();
+        })
+    })
+})
+
+describe('#start', () => {
+    it('should fetch all pages', (done) => {
+        start(function(err, data) {
+            console.log(err);
+            console.log('done');
             done();
         })
     })

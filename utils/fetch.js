@@ -2,14 +2,25 @@
 
 import request from 'request';
 import cheerio from 'cheerio';
+import config from 'config';
+import async from 'async';
+import { logger, saveToDb } from './';
 
 
-const fetchQueries = []; 
+var dataStore = []; 
 
+/* convert int to int, percent to string */
 function normalizePropData(str) {
     return str.indexOf('%') === -1 ? parseInt(str) : str;
 }
 
+/* generate new delay in sec */
+function getDelay () {
+    const {min, max} = config.delay;
+    return Math.floor(Math.random() * (max - min) + min) * 1000;
+}
+
+/* map table properties */
 const props = {
     0: 'growth',
     1: 'subscribers',
@@ -20,7 +31,7 @@ const props = {
     6: 'maxDD'
 }
 
-
+/* parse data from web page */
 export function fetchPageData(url, callback) {
     request(url, function(err, res, body) {
         if (err) return callback(err);
@@ -76,10 +87,46 @@ export function fetchPageCount (url, callback) {
 
 }
 
-export function addFetchQuery (q) {
+/* start parsing */
+export function start(callback) {
+    if (dataStore.length) return callback(Error('parsing already started'));
 
-}
+    let i = 0;
+    const {parsingUrl, maxPages} = config;
 
-export function start() {
+    /* clear store */
+    dataStore = [];
 
+    /* exit function */
+    function match() {
+        return i < maxPages;
+    }
+
+    /* call parsing with delay */
+    function query(done) {
+        ++i;
+
+        let q = setTimeout(() => {
+            logger.info(`Parsing the page launched. // ${parsingUrl}/page${i}`);
+
+            fetchPageData(`${parsingUrl}/page${i}`, function(err, data) {
+                err ?
+                    logger.error('Parsing failed', err) :
+                    logger.info(`Parsing the page is finished. ${data.length} objects parsed`); 
+
+                dataStore.push(...data);
+                done();
+            });
+
+        }, getDelay());
+    }
+    
+    /* start web resource parsing */
+    async.whilst(match, query, err => {
+        if (err) {
+            logger.error(err);
+        } else {
+            saveToDb(dataStore, callback);
+        }
+    });
 }

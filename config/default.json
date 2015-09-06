@@ -1,0 +1,21 @@
+{
+    "maxPages": 70,
+
+    "parsingUrl": "https://www.mql5.com/en/signals/mt4",
+    
+    "delay": {
+        "min": 2,
+        "max": 12
+    },
+    
+    "logger": {
+        "level": "debug",
+        "path": "/../logs",
+        "filename": "app.log",
+        "timeZoneOffset": 3
+    },
+
+    "db": {
+        "url": "mongodb://localhost/fx-test"
+    }
+}
