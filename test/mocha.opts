@@ -1,0 +1,5 @@
+--compilers js:babel/register
+--require should
+--reporter dot
+--ui bdd
+--timeout 2000

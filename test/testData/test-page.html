@@ -1,0 +1,1808 @@
+<html lang="ru"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta name="keywords" content="metatrader, торговые сигналы, копирование сделок, социальный трейдинг, мониторинг счета, metatrader 4">
+    <meta name="description" content="Торговые Сигналы для MetaTrader: копирование сделок, мониторинг счета, автоматическое исполнение сигналов и социальный трейдинг - MetaTrader 4">
+    <meta property="og:title" content="Торговые сигналы MetaTrader 4: MetaTrader 4">
+    <meta property="og:description" content="Торговые сигналы для MetaTrader 4 с автоматическим исполнением на вашем счете">
+    <meta property="og:image" content="https://www.mql5.com/i/community/logo_mql5.png">
+    <meta property="og:type" content="object">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mql5com">
+    <meta name="twitter:image" content="https://www.mql5.com/i/community/logo_mql5_twitter.png">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="/i/favicon.ico">
+    <meta name="msapplication-config" content="none">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <link href="https://c.mql5.com/styles/core.3a9ffd3f3b6fb8a55e65445208633aa6.css" type="text/css" rel="stylesheet" media="all">
+    
+    <link href="https://c.mql5.com/styles/all.4399bdb56d720a5574f6e447cdaca2e6.css" type="text/css" rel="stylesheet" media="all">
+    
+    <link rel="alternate" hreflang="en" href="https://www.mql5.com/en/signals/mt4">
+    <link rel="alternate" hreflang="ru" href="https://www.mql5.com/ru/signals/mt4">
+    <link rel="alternate" hreflang="zh" href="https://www.mql5.com/zh/signals/mt4">
+    <link rel="alternate" hreflang="es" href="https://www.mql5.com/es/signals/mt4">
+    <link rel="alternate" hreflang="pt" href="https://www.mql5.com/pt/signals/mt4">
+    <title>Торговые сигналы и копирование сделок в MetaTrader 4</title>
+    <script type="text/javascript">
+        var mqGlobal = {};
+        mqGlobal.AddOnLoad = function(callback)
+        {
+            if(!this._onload) this._onload = [];
+            this._onload[this._onload.length] = callback;
+        };
+        mqGlobal.AddOnReady = function(callback)
+        {
+            if(!this._onready) this._onready = [];
+            this._onready[this._onready.length] = callback;
+        };
+        mqGlobal.AddOnActiveWindowChange = function(callback)
+        {
+            if(!this._onvisibility) this._onvisibility = [];
+            this._onvisibility[this._onvisibility.length] = callback;
+        };
+    </script>
+    
+<style type="text/css">/*.lleo_errorSelection *::-moz-selection,
+.lleo_errorSelection *::selection,
+.lleo_errorSelection *::-webkit-selection {
+    background-color: red !important;
+    color: #fff !important;;
+}*/
+
+#lleo_dialog,
+#lleo_dialog * {
+    color: #000 !important;
+    font: normal 13px Arial, Helvetica !important;
+    line-height: 15px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none 0 !important;
+    position: static !important;
+    vertical-align: baseline !important;
+    overflow: visible !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    float: none !important;
+    visibility: visible !important;
+    text-align: left !important;
+    text-transform: none !important;
+    border-collapse: separate !important;
+    border-spacing: 2px !important;
+    box-sizing: content-box !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    -webkit-filter: none !important;
+    -moz-filter: none !important;
+    filter: none !important;
+}
+#lleo_dialog *:before,
+#lleo_dialog *:after {
+    content: '';
+}
+
+#lleo_dialog iframe {
+    height: 0 !important;
+    width: 0 !important;
+}
+
+#lleo_dialog {
+    position: absolute !important;
+    background: #fff !important;
+    border: solid 1px #ccc !important;
+    padding: 7px 0 0 !important;
+    left: -999px;
+    top: -999px;
+    width: 440px !important;
+    overflow: hidden;
+    display: block !important;
+    z-index: 999999999 !important;
+    box-shadow: 8px 16px 30px rgba(0, 0, 0, 0.16) !important;
+    border-radius: 3px !important;
+    opacity: 0 !important;
+    -webkit-transform: translateY(15px);
+    -moz-transform: translateY(15px);
+    -ms-transform: translateY(15px);
+    -o-transform: translateY(15px);
+    transform: translateY(15px);
+}
+#lleo_dialog.lleo_show_small {
+    width: 150px !important;
+}
+#lleo_dialog.lleo_show {
+    opacity: 1 !important;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s !important;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s !important;
+    -ms-transition: -ms-transform 0.3s, opacity 0.3s !important;
+    -o-transition: -o-transform 0.3s, opacity 0.3s !important;
+    transition: transform 0.3s, opacity 0.3s !important;
+}
+#lleo_dialog.lleo_collapse {
+    opacity: 0 !important;
+    -webkit-transform: scale(0.25, 0.1) translate(-550px, 100px);
+    -moz-transform: scale(0.25, 0.1) translate(-550px, 100px);
+    -ms-transform: scale(0.25, 0.1) translate(-550px, 100px);
+    -o-transform: scale(0.25, 0.1) translate(-550px, 100px);
+    transform: scale(0.25, 0.1) translate(-550px, 100px);
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.4s !important;
+    -moz-transition: -moz-transform 0.4s, opacity 0.4s !important;
+    -ms-transition: -ms-transform 0.4s, opacity 0.4s !important;
+    -o-transition: -o-transform 0.4s, opacity 0.4s !important;
+    transition: transform 0.4s, opacity 0.4s !important;
+}
+#lleo_dialog input::-webkit-input-placeholder {
+    color: #aaa !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_word {
+    margin-right: 80px !important;
+}
+#lleo_dialog #lleo_translationsContainer1 {
+    position: relative !important;
+}
+#lleo_dialog #lleo_translationsContainer2 {
+    padding: 7px 0 0 !important;
+    vertical-align: middle !important;
+}
+#lleo_dialog #lleo_word {
+    color: #000 !important;
+    margin: 0 5px 2px 0 !important;
+    /*float: left !important;*/
+}
+#lleo_dialog .lleo_has_sound #lleo_word {
+    margin-left: 30px !important;
+}
+#lleo_dialog #lleo_text {
+    font-weight: bold !important;
+    color: #d56e00 !important;
+    text-decoration: none !important;
+    cursor: default !important;
+}
+/*
+#lleo_dialog #lleo_text.lleo_known {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+*/
+/*#lleo_dialog #lleo_closeBtn {
+    position: absolute !important;
+    right: 6px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 0 !important;
+    color: #aaa !important;
+    display: block !important;
+    z-index: 9999999999 !important;
+    width: 7px !important;
+    height: 7px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}*/
+
+#lleo_dialog #lleo_optionsBtn {
+    position: absolute !important; 
+    right: 3px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #aaa !important;
+    padding: 2px !important;
+    display: none;
+}
+    #lleo_dialog.lleo_optionsShown #lleo_optionsBtn {
+        display: block !important;
+    }
+    #lleo_dialog #lleo_optionsBtn img {
+        width: 12px !important;
+        height: 12px !important;
+    }
+#lleo_dialog #lleo_sound {
+    float: left !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 9px !important;
+    margin-right: 3px !important;
+    background: 0 0 no-repeat !important;
+    cursor: pointer !important;
+    display: none !important;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAfNJREFUeNq0U01IVFEU/u57Oo5WhBRIBBptykWLYBa2soWiEKQQEbrSFsGbVRQKQc2iFqGitXqvjQxCoCJCqyI0aBUtZILaJNUuYWYWo8HovJ/707nP94bnz0rxwvfOuefd8517fi5TSuE4i50YwZ3l37ZhNlpgzFkaaM/G9sHF1YskNrT+7l4PjMOcb78t2JL71uxgB+2UlfxHTtq5N94fIOh/88kWgWfl73ZCSQkpeGg3H091JY6dI2S00qA/N3KO3dDUYhFgEmZGurG+w9FqApIHsVM7kaTF9Nhn0r8Q7hPWQgIRuNaH3AMUA4W/Lkdh04cpFS43G0TgxQTvCdMETVAk3KynIHwXZU/ge8XDt7KH9bKLjU0P2zVO5LsEpSejVRJ9UR18EtfqKegovs9R3Q6w9c/H1o4Aa2Jwm1lIvn9RJ4w9RdRRzqcYrpwycCll4Cy1lnkS3Bc6vfBg28v8aRIfI78zhB/1GygROH3jLyyzMQ0zlUZuZBSlKkeLoegGtTjYLcJ8pF+NakHOFC2J6w+f25mxSfWrWFF/ShXVPTGvtN14NNkVnxlYWJkgZEL7/vwKr55lKSVnaGYWkuYgrgG172uUv47+U7fw0EHaJXmalUQy/HqO6lBzEsVjJC4Q8kd6TETQpjuaGOvjv8b/AgwA/ij1XMx58NIAAAAASUVORK5CYII=) !important;
+}
+#lleo_dialog .lleo_has_sound #lleo_sound {
+    display: block !important;
+}
+
+#lleo_dialog #lleo_soundWave {
+    border: solid 5px #4495CC !important;
+    border-radius: 5px !important;
+    position: absolute !important;
+    left: -5px !important;
+    top: -5px !important;
+    right: -5px !important;
+    bottom: -5px !important;
+    z-index: 0 !important;
+    opacity: 0.9 !important;
+    display: none !important;
+}
+    #lleo_dialog #lleo_soundWave.lleo_beforePlaying {
+        display: block !important;
+    }
+    #lleo_dialog #lleo_soundWave.lleo_playing {
+        opacity: 0 !important;
+        border-width: 20px !important;
+        border-radius: 30px !important;
+
+        -webkit-transform: scale(1.07,1.1) !important;
+        -moz-transform: scale(1.07,1.1) !important;
+        -ms-transform: scale(1.07,1.1) !important;
+        transform: scale(1.07,1.1) !important;
+
+        -webkit-transition: all 0.6s !important;
+        -moz-transition: all 0.6s !important;
+        -ms-transition: all 0.6s !important;
+        transition: all 0.6s !important;
+    }
+
+
+#lleo_dialog #lleo_picOuter {
+    position: absolute !important;
+    float: right !important;
+    top: 4px;
+    right: 5px;
+    z-index: 9 !important;
+    display: none !important;
+    width: 100px !important;
+}
+    #lleo_dialog.lleo_optionsShown #lleo_picOuter {
+        right: 25px;
+    }
+#lleo_dialog .lleo_has_pic #lleo_picOuter {
+    display: block !important;
+}
+    #lleo_dialog #lleo_picOuter:hover {
+        width: auto !important;
+        z-index: 11 !important;
+    }
+#lleo_dialog #lleo_pic,
+#lleo_dialog #lleo_picBig {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    border: solid 2px #fff !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    border-radius: 2px !important;
+    z-index: 1 !important;
+}
+#lleo_dialog #lleo_pic {
+    position: relative !important;
+    border: none !important;
+    width: 30px !important;
+}
+#lleo_dialog #lleo_picBig {
+    box-shadow: -1px 2px 4px rgba(0,0,0,0.3);
+    z-index: 2 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+    #lleo_dialog #lleo_picOuter:hover #lleo_picBig {
+        visibility: visible !important;
+        opacity: 1 !important;
+        -webkit-transition: opacity 0.3s !important;
+        -webkit-transition-delay: 0.3s !important;
+    }
+#lleo_dialog #lleo_transcription {
+    margin: 0 80px 4px 31px !important;
+    color: #aaaaaa !important;
+}
+#lleo_dialog .lleo_no_trans {
+    color: #aaa !important;
+}
+
+#lleo_dialog .ll-translation-counter {
+    float: right !important;
+    font-size: 11px !important;
+    color: #aaa !important;
+    padding: 2px 2px 1px 10px !important;
+}
+
+#lleo_dialog .ll-translation-text {
+    float: left !important;
+    /*width: 80% !important;*/
+}
+
+#lleo_dialog #lleo_trans a {
+    color: #3F669F !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis !important;
+    padding: 1px 4px !important;
+    overflow: hidden !important;
+    float: left !important;
+    width: 320px !important;
+}
+
+#lleo_dialog .ll-translation-item {
+    color: #3F669F !important;
+    border: solid 1px #fff !important;
+    padding: 3px !important;
+    width: 100% !important;
+    float: left !important;
+    -moz-border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    border-radius: 2px !important;
+}
+
+#lleo_dialog .ll-translation-item:hover {
+    border: solid 1px #9FC2C9 !important;
+    background: #EDF4F6 !important;
+    cursor: pointer !important;
+}
+#lleo_dialog .ll-translation-item:hover .ll-translation-counter {
+    color: #83a0a6 !important;
+}
+
+#lleo_dialog .ll-translation-marker {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAWSURBVBhXY7RPm/+fAQkwIXNAbMICAJQ8AkvqWg/SAAAAAElFTkSuQmCC) !important;
+    display: inline-block !important;
+    width: 4px !important;
+    height: 4px !important;
+    margin: 7px 5px 2px 2px !important;
+    float: left !important;
+}
+
+#lleo_dialog #lleo_icons {
+    color: #aaa !important;
+    font-size: 11px !important;
+    background: #f8f8f8 !important;
+    padding: 10px 10px 10px 16px !important;
+}
+#lleo_icons a {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 10px -4px 3px !important;
+    text-decoration: none !important;
+    opacity: 0.5 !important;
+    background: url(data:image/png;base64,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) !important;
+}
+#lleo_icons a:hover {
+    opacity: 1 !important;
+}
+#lleo_icons a.lleo_google     {background-position:-34px 0 !important;}
+#lleo_icons a.lleo_multitran  {background-position:-64px 0 !important;}
+#lleo_icons a.lleo_lingvo     {background-position:-51px 0 !important; width: 12px !important;}
+#lleo_icons a.lleo_dict       {background-position:-17px 0 !important;}
+#lleo_icons a.lleo_linguee    {background-position:-81px 0 !important;}
+#lleo_icons a.lleo_michaelis  {background-position:-98px 0 !important;}
+
+#lleo_dialog #lleo_contextContainer {
+    margin: 0 !important;
+    padding: 3px 15px 8px 10px !important;
+    background: #eee !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)) !important;
+    background: -moz-linear-gradient(-90deg, #fff, #eee) !important;
+    border-bottom: solid 1px #ddd !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    display: none !important;
+    overflow: hidden !important;
+}
+#lleo_dialog .lleo_has_context #lleo_contextContainer {
+    display: block !important;
+}
+#lleo_dialog #lleo_context {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    line-height: 12px !important;
+    font-size: 11px !important;
+    margin-left: 2px !important;
+}
+#lleo_dialog #lleo_context b {
+    line-height: 12px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+/*#lleo_dialog #lleo_gBrand {
+    color: #aaa !important;
+    font-size: 10px !important;
+    *//*padding-right: 52px !important;*//*
+    padding-bottom: 14px !important;
+    margin: -3px 4px 0 4px !important;
+    background: left bottom url(data:image/png;base64,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) no-repeat !important;
+    display: inline-block !important;
+    float: right !important;
+}
+#lleo_dialog #lleo_gBrand.hidden {
+    display: none !important;
+}*/
+#lleo_dialog #lleo_translateContextLink {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#ddd)) !important;
+    background: -moz-linear-gradient(-90deg, #f4f4f4, #ddd) !important;
+    border: solid 1px !important;
+    box-shadow: 1px 1px 0 #f6f6f6 !important;
+    border-color: #999 #aaa #aaa #999 !important;
+    -moz-border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    border-radius: 2px !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    margin: 1px 5px 0 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+}
+#lleo_dialog #lleo_translateContextLink:hover {
+    background: #f8f8f8 !important;
+}
+#lleo_dialog #lleo_translateContextLink.hidden {
+    visibility: hidden !important;
+}
+
+#lleo_dialog #lleo_setTransForm {
+    display: block !important;
+    margin-top: 3px !important;
+    padding-top: 5px !important;
+    /* Set position and background because the form might be overlapped by an image when no translations */
+    position: relative !important;
+    background: #fff !important;
+    z-index: 10 !important;
+    padding-bottom: 10px !important;
+    padding-left: 16px !important;
+}
+#lleo_dialog .lleo-custom-translation {
+    padding: 4px 5px !important;
+    border: solid 1px #ddd !important;
+    border-radius: 2px !important;
+    width: 90% !important;
+    min-width: 270px !important;
+    background: -webkit-gradient(linear, 0 0, 0 20, from(#f1f1f1), to(#fff)) !important;
+    background: -moz-linear-gradient(-90deg, #f1f1f1, #fff) !important;
+    font: normal 13px Arial, Helvetica !important;
+    line-height: 15px !important;
+}
+#lleo_dialog .lleo-custom-translation:hover {
+    border: solid 1px #aaa !important;
+}
+#lleo_dialog .lleo-custom-translation:focus {
+    background: #FFFEC9 !important;
+}
+
+#lleo_dialog *.hidden {
+    display: none !important;
+}
+
+#lleo_dialog .infinitive{
+    color: #D56E00 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted #D56E00 !important;
+}
+#lleo_dialog .infinitive:hover{
+    border: none !important;
+}
+
+#lleo_dialog .lleo_separator {
+    height: 1px !important;
+    background: #eee;
+    margin-top: 10px !important;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%,#eee 8%,rgba(255,255,255,1) 80%) !important;
+    background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, #eee 8%, rgba(255,255,255,1) 80%) !important;
+    background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%,#eee 8%,rgba(255,255,255,1) 80%) !important;
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%,#eee 8%,rgba(255,255,255,1) 80%) !important;
+}
+#lleo_dialog #lleo_trans {
+    /*border-top: 1px solid #eeeeee !important;*/
+    padding: 5px 30px 0 14px !important;
+    zoom: 1;
+}
+
+#lleo_dialog .lleo_clearfix {
+    display: block !important;
+    clear: both !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    font-size: 0 !important;
+}
+
+
+#lleo_dialog #lleo_picOuter table {
+    width: 44px !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_picOuter td {
+    width: 38px !important;
+    height: 38px !important;
+    /*border: 1px solid #eeeeee !important;*/
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+#lleo_dialog #lleo_picOuter td div {
+    height: 38px !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .lleo_empty {
+    margin: 0 5px 7px !important;
+}
+
+#lleo_youtubeExportBtn {
+    margin-left: 10px;
+    height: 24px;
+}
+    #lleo_youtubeExportBtn i {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: 0 0 url(https://d144fqpiyasmrr.cloudfront.net/plugins/all/images/i16.png) !important;
+    }
+    #lleo_youtubeExportBtn .yt-uix-button-content {
+        font-size: 12px;
+        line-height: 2px;
+    }
+
+
+/*** Parsed Lyrics Content *****************************/
+
+.lleo_lyrics tran {
+    background: transparent !important;
+    border-radius: 2px !important;
+    text-shadow: none !important;
+    cursor: pointer !important;
+}
+    .lleo_lyrics tran:hover {
+        color: #fff !important;
+        background: #C77213 !important;
+        -webkit-transition: all 0.1s !important;
+        -moz-transition: all 0.1s !important;
+        -ms-transition: all 0.1s !important;
+        -o-transition: all 0.1s !important;
+        transition: all 0.1s !important;
+    }
+
+.lleo_songName {
+    border: solid 1px #ffd47c;
+    background: #fff1c2;
+    border-radius: 2px;
+}
+
+.lleo_hidden_iframe {
+    visibility: hidden;
+}</style><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+<body>
+<div class="cover" id="cover">
+    
+    
+    <div class="head">
+        <a href="https://www.mql5.com" class="logo" title="MQL5 - Язык торговых стратегий для клиентского терминала MetaTrader 5"></a>
+        
+        <ul class="menu" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+<li><a href="/ru/blogs" itemprop="url"><span>Блоги</span></a></li>
+<li><a href="/ru/trading" itemprop="url"><span>Торговля</span></a></li>
+<li><a href="/ru/docs" itemprop="url"><span>Документация</span></a></li>
+<li><a href="/ru/code" itemprop="url"><span>Code Base</span></a></li>
+<li><a href="/ru/articles" itemprop="url"><span>Статьи</span></a></li>
+<li><a href="/ru/job" itemprop="url"><span>Фриланс</span></a></li>
+<li><a href="/ru/market" itemprop="url"><span>Маркет</span></a></li>
+<li class="selected"><a href="/ru/signals" itemprop="url"><span>Сигналы</span></a></li>
+<li><a href="/ru/forum" itemprop="url"><span>Форум</span></a></li>
+</ul>
+        
+        <div class="toolbar">
+            
+            <div class="container notificationsToolbar"><ul id="privateAreaMessages">
+<li><a class="linkNotify" href="/ru/users/yiioxir/messages" id="notify_messages" title="Сообщения"><span class="messages"></span></a></li>
+<script type="text/javascript">
+    mqGlobal.AddOnReady(function()
+    {
+        var localization = {
+            friendsHeader:"Друзья",
+            newMessageHeader: "Написать сообщение",
+            userToLabel: "Часть имени или логин",
+            gotoMessages:"Перейти к списку сообщений",
+            gotoMessage:"Перейти к переписке",
+            otherUsersHeader:"Другие пользователи",
+            returnToList:"Вернуться к списку сообщений (ESC)",
+            closeChat:"Закрыть переписку",
+            attachedFilesHeader: "Прикрепленные файлы",
+            attachFileTitle: "Прикрепить файл",
+            sendMessageTitle: "Ответить",
+            expandWindow:"Расширить окно чатов",
+            minimizeWindow:"Уменьшить окно чатов",
+            searchUserPlaceholder:"Часть имени или логин",
+            selfDestructHour:"1 час",
+            selfDestructDay:"1 день",
+            selfDestructWeek:"1 неделя",
+            selfDestructMonth:"1 месяц",
+            selfDestructNone:"таймер отключен",
+            selfDestructSelectTitle:"Включить автоматическое удаление старых сообщений по таймеру\nСообщения будут удалятся физически без возможности восстановления",
+            selfDestructHourTooltip:"Удалять все сообщения старше 1 часа",
+            selfDestructDayTooltip:"Удалять все сообщения старше 1 дня",
+            selfDestructWeekTooltip:"Удалять все сообщения старше 1 недели",
+            selfDestructMonthTooltip:"Удалять все сообщения старше 1 месяца",
+            selfDestructNoneTooltip:"Отключить автоматическое удаление старых сообщений"
+        };
+        if(!ieVersion || ieVersion > 7)
+            window.MessagesWidget = new chatWidget(563240, 'yiioxir', 'ru',localization,"true",false,true);
+    });
+    if(!window.dateToTextLocalization) window.dateToTextLocalization = {'m1':'минуту назад','m2':'минуты назад',m3:'минут назад','h1':'час назад','h2':'часа назад',h3:'часов назад'};
+</script></ul></div>
+
+            <div class="groupMenu" id="groupMenu">
+                <div class="container profileToolbar"><ul id="profile"><li class="userLinkContainer" id="userLinkContainer"><a href="/ru/users/yiioxir" class="userlink" id="userlink" title=""><img src="https://c.mql5.com/avatar/avatar_na_micro.png" alt="" width="29" height="29"><span class="firstname">yiioxir</span> <span class="lastname"></span></a><ul class="userLinkMenu" id="userLinkMenu">
+<li class="profile"><a href="/ru/users/yiioxir"><span>Профиль</span></a></li>
+<li class="favorites"><a href="/ru/users/yiioxir/favorites"><span>Избранное</span></a></li>
+<li class="messages delimiter"><a href="/ru/users/yiioxir/messages"><span>Сообщения</span></a></li>
+<li class="news"><a href="/ru/users/yiioxir/news"><span>Лента новостей</span></a></li>
+<li class="choosein delimiter"><a href="/ru/users/yiioxir/accounting/choosein"><span>Пополнить счет</span></a></li>
+<li class="chooseout"><a href="/ru/users/yiioxir/accounting/chooseout"><span>Снять со счета</span></a></li>
+<li class="settings delimiter"><a href="/ru/users/yiioxir/edit"><span>Настройки</span></a></li>
+<li class="logout delimiter"><a href="/ru/auth_logout"><span>Выход</span></a></li>
+</ul></li></ul></div>
+                <div class="container langMenuContainer"><div id="langMenuContainer"><b id="langMenuSelected" class="ru"><span>Русский</span></b><ul class="langmenu" id="langmenu"><li class="en"><a href="/en/signals/mt4"><span>English</span></a></li><li class="zh"><a href="/zh/signals/mt4"><span>中文</span></a></li><li class="es"><a href="/es/signals/mt4"><span>Español</span></a></li><li class="pt"><a href="/pt/signals/mt4"><span>Português</span></a></li><input type="checkbox" class="blurHandler"></ul></div></div>
+                <div class="container searchBoxContainer"><div id="searchBoxContainer"><form onsubmit="document.location.assign((&quot;https://www.mql5.com/ru/search&quot;) + ($(&quot;keyword&quot;).value.length>0?(&quot;#!keyword=&quot;+encodeURIComponent($(&quot;keyword&quot;).value)):&quot;&quot;));if(document.location.href.indexOf(&quot;/ru/search&quot;)>=0)setTimeout(function(){document.location.reload(true);},10);return false;" id="main_search_form" action="https://www.mql5.com/ru/search" method="post"><div class="inputWrapper"><input title="Введите текст для поиска" id="keyword" name="keyword" type="text" value="" autocomplete="off"></div><input type="submit" value="" class="hiddenSearchSubmit"><div class="searchSubmit" id="searchSubmit"></div></form><script type="text/javascript">mqGlobal.AddOnLoad(function(){window.keywordMainFormSuggests = new Suggestions("keyword","https://search.mql5.com/api/suggest","ru",function(){$('main_search_form').onsubmit();});});</script></div></div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="top_container">
+<span class="content"><a onclick="traceClickAsync(this,'click','click_b_main','https%3a%2f%2fwww.mql5.com%2fclick%2fru_financial_copier_in_metatrader','ru');" href="https://www.mql5.com/click/ru_financial_copier_in_metatrader" title="Подбери свой сигнал для MetaTrader 4 и MetaTrader 5" target="_blank">
+    <img src="https://c.mql5.com/10/0/financial_copier_ru__1.gif" alt="Подбери свой сигнал для MetaTrader 4 и MetaTrader 5" title="Подбери свой сигнал для MetaTrader 4 и MetaTrader 5" width="800" height="80">
+</a></span>
+    </div>
+          
+        
+
+    <div class="body" id="bodyContent">
+        <div class="top-band">
+    <div class="shortlinks" style="display:none;">
+        <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/ru/signals" itemprop="url" title="Сигналы"><span itemprop="title">Сигналы</span></a></span> /
+        <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">MetaTrader 4</span></span>
+    </div>
+   <div style="text-align:right;"><strong><a href="/ru/signals/new">Создать свой сигнал</a></strong> 
+   </div></div>
+<div id="left-panel" class="left-panel">
+  <div class="treeReadWrapper">
+    <ul class="treeMenuRoot">
+      <li><a href="/ru/signals/mt5" class="accountCategories categoryMt"><span class="inLink">MetaTrader 5</span></a></li>
+      <li class="selected"><a href="/ru/signals/mt4" class="accountCategories categoryMt"><span class="inLink">MetaTrader 4</span></a></li>
+    </ul>
+    <ul class="treeMenuRoot">
+      <li><a href="/ru/signals/my" class="accountCategories myAccounts"><span class="inLink">Мои сигналы</span></a>
+      </li>
+      <li><a href="/ru/signals/subscriptions" class="accountCategories mySubscriptions"><span class="inLink">Мои подписки</span></a></li>
+    </ul>
+    <ul class="treeMenuRoot nodelim">
+      <li><a href="/ru/signals/widgets" class="accountCategories widgets"><span class="inLink">Виджеты</span></a></li>
+    </ul>
+
+    <ul class="treeMenuRoot">
+      <li><a class="accountCategories rules" href="/ru/signals/rules" target="_blank"><span class="inLink">Правила</span></a></li>
+    </ul>
+    <div style="margin-top: 28px;">
+      
+      <div class="newmenu-advice plain xl">
+        <a class="suggestIco signalsVideoTutorialYoutube"></a>
+        <p>Смотри <a onclick="traceClickAsync(this,'click','click_article_signal_tutorial_video','http%3a%2f%2fyoutu.be%2ftNQ_JB_ZswU%3flist%3dPLltlMLQ7OLeKMxPEMAQiYIbthg1IsTgGz','ru');" href="http://youtu.be/tNQ_JB_ZswU?list=PLltlMLQ7OLeKMxPEMAQiYIbthg1IsTgGz" target="_blank" rel="nofollow">обучающее видео</a> по сигналам на YouTube</p>
+      </div>
+      <div class="newmenu-advice plain">
+        <div class="suggestIco howtoSignals"></div>
+        <p>Как стать <a onclick="traceClickAsync(this,'click','click_article_how_to_become_signals_provider','https%3a%2f%2fwww.mql5.com%2fru%2farticles%2f591','ru');" href="https://www.mql5.com/ru/articles/591" target="_blank" rel="nofollow">поставщиком</a> сигналов</p>
+      </div>
+      <div class="newmenu-advice plain">
+        <div class="suggestIco howtoSubscribe"></div>
+        <p>Как <a onclick="traceClickAsync(this,'click','click_article_how_to_subscribe_to_signals','https%3a%2f%2fwww.mql5.com%2fru%2farticles%2f523','ru');" target="_blank" href="https://www.mql5.com/ru/articles/523">подписаться</a> на сигналы</p>
+      </div>
+      <div class="newmenu-advice plain">
+        <div class="suggestIco howtoCopyVolumes"></div>
+        <p>Узнай, как <a onclick="traceClickAsync(this,'click','click_article_how_to_copy_volumes','https%3a%2f%2fwww.mql5.com%2fru%2farticles%2f618','ru');" target="_blank" href="https://www.mql5.com/ru/articles/618">копируются</a> объемы</p>
+      </div>
+      <div class="newmenu-advice plain">
+        <div class="suggestIco howtoCopyHosting"></div>
+        <p>Копируй сигналы на <a onclick="traceClickAsync(this,'click','click_article_how_to_copy_signals_hosting','https%3a%2f%2fwww.mql5.com%2fru%2farticles%2f994','ru');" href="https://www.mql5.com/ru/articles/994" target="_blank">виртуальном</a> хостинге</p>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+<div class="products-form"> 
+  <div class="signalsIntroBlock">
+    <h1 class="intro">Торговые сигналы для MetaTrader 4 с автоматическим исполнением на вашем счете</h1>
+    <div class="signalsIntroIco" style="background-position: 0 -5px;"></div>
+    <p>Выберите подходящую торговую систему и оформите на неё подписку в пару кликов. Замониторенные счета сопровождаются подробной статистикой и торговой историей. Посмотрите <a href="https://www.mql5.com/ru/articles/821" target="_blank">обучающий видеоролик</a> о том, как подписаться на Сигнал.</p>
+<p>Продавайте торговые сигналы своей системы тысячам подписчиков по всему миру и оставайтесь её единственным разработчиком. С нами ваша прибыльная стратегия может принести вам доход даже при небольшом стартовом капитале.</p>
+      
+  </div>
+    
+  <div style="border-bottom:1px solid #DADADA;line-height:24px;overflow:visible;padding:7px 0;" class="signalFilter">
+    <div class="signalsTabs popup left" style="padding: 0 0 0 10px;margin: 0 -1px 0 0;float:left;">
+      <strong>Сервер вашего брокера:</strong>
+      <div style="position:relative;display:inline-block">
+      <a href="javascript:void(false);" id="brokerFilter" class="buttonNew dropdown">MTrading-Live2</a>
+      <div id="brokerFilterBody" class="window-filter mid" style="left: -113px;">
+        <div class="triangle"></div>
+        <div class="triangle border"></div>
+        <div class="sub">
+          <p>Мы выберем для вас сигналы с наилучшими условиями копирования на ваш счет: </p>
+          <form action="" method="POST">
+              
+<div>
+  <div class="inputWrapper up" style="width: auto;">
+    <input id="filter_broker" name="filter_broker" placeholder="Например, MetaQuotes-Demo" style="width:100%;" type="text" value="MTrading-Live2">
+  </div>
+<div class="select-edit-list" style="width: 0px;"><table></table></div></div>
+
+
+<script type="text/javascript">
+  var filter_brokerAutocomplete;
+  mqGlobal.AddOnReady(function() {
+        var autocomplete = new MQAutoComplete();
+        autocomplete.id = 'filter_broker';
+        autocomplete.loadItemValue = function(link) {
+          var value = link.server || link.Server || link.getAttribute('server') || link.getAttribute('Server');
+          BrokerFilterSelect(value);
+          
+          return value;
+        };
+        autocomplete.loadResultValue = function(item) {
+          return item.server || item.Server;
+        };
+        autocomplete.bindResult = function(link,item) {
+          if (!(item.broker || item.Broker) || (item.broker || item.Broker) == '') {
+            link.innerHTML = 'Уточните запрос. Вашему критерию удовлетворяет слишком много вариантов';
+            link.className = 'more';
+            return;
+          }
+          link.innerHTML = "<em>" + (item.broker || item.Broker) + "</em>" + (item.server || item.Server);
+          link.broker = (item.broker || item.Broker);
+          link.server = (item.server || item.Server);
+          link.mt = (item.mt || item.MT);
+          link.setAttribute('server',(item.server || item.Server));
+          link.setAttribute('broker',(item.broker || item.Broker));
+          link.setAttribute('mt',(item.mt || item.MT));
+          //---
+          if (item.mt && item.mt != autocomplete.getMtVersion())
+            link.innerHTML += "<strong>MT" + item.mt + "</strong>";
+        };
+        autocomplete.onPopup = function(field,dropdown) {
+          var tabsContainer = document.getElementById('control-panel-tabs');
+          var tabsHeader = document.getElementById('control-panel-tab-menu');
+          //---
+          if (!tabsContainer || !tabsHeader)
+            return;
+          //---
+          tabsContainer.appendChild(dropdown);
+          dropdown.style.left = field.offsetLeft  + field.scrollLeft - 1 + "px";
+          dropdown.style.top = field.offsetTop + field.scrollTop + tabsHeader.clientHeight + 22 + "px";
+        };
+        autocomplete.buildAjaxQueryUrl = function ()
+          {
+          var mt = autocomplete.getMtVersion();
+          return mt 
+            ? '/signals/brokers/mt' + autocomplete.getMtVersion() + '/json'
+            : null;
+          };
+        autocomplete.multiple = true;
+        //---
+        autocomplete.getMtVersion = function() {
+            return 4;
+        };
+        //---
+        autocomplete.init();
+        filter_brokerAutocomplete = autocomplete;
+      });
+</script>
+          </form>
+          <div class="notes">
+              <a href="javascript:void(false)" rel="nofollow" onclick="document.location = document.location.pathname + '?filter_broker_reset=1'">× Сбросить</a>
+          </div>
+          <form name="brokerFilter" action="" method="POST"><input type="hidden" name="filter_broker"></form>
+          <p>Ранее выбранные серверы: <a href="javascript:void(false);" onclick="ApplyBrokerFilter('LCG-Demo Production')">LCG-Demo Production</a>, <a href="javascript:void(false);" onclick="ApplyBrokerFilter('MTrading-Demo')">MTrading-Demo</a></p>
+        </div>
+      </div>
+      </div>
+      <span class="welcome-badge">найдите лучшие сигналы <br>для вашего счета</span>
+    </div>
+    <div class="signalFilter" style="margin:0 5px 0 1px;float:right;padding:0 1px;height:24px;">
+      
+<div class="signalFilter">
+    <div class="filter" id="filter_win_com">
+        <a class="buttonNew dropdown filtered hover" onclick="Signals.ViewFilter('window-filter',document.getElementById('filter_win_com')); return false;" href="#">
+            Фильтр</a>
+    </div>
+    <div class="window-filter" id="window-filter" style="display: none;">
+      <div class="triangle"></div>
+      <div class="triangle border"></div>
+      <div class="sub">
+        <form method="post" lpformnum="1">
+          Поиск по имени, автору, брокеру:
+          <div style="margin: 3px 0 15px 0;" id="filterSubstring">
+            <div class="inputWrapper">
+              <input type="text" name="filterSubstring" value="" class="text" style="width:100%">
+            </div>
+            <p>Укажите полное или частичное название сигнала, логин автора либо имя сервера/брокера, со счета которого транслируется сигнал.</p>
+          </div>
+            
+          <div style="margin: 3px 0 15px 0;">
+            <label>
+              <input id="filterProductionOff" name="filterProductionOff" style="vertical-align: middle;" type="checkbox" value="true"><input name="filterProductionOff" type="hidden" value="false">
+              <span>Сигналы, не доступные для подписки</span>
+            </label>
+            <p>Отображать сигналы, недоступные для подписки.</p>
+          </div>Плечо 
+          <div class="filterLabel" id="filterLeverageLabel"><input id="filterLeverageFrom" name="filterLeverageFrom" type="text"><text>-</text><input id="filterLeverageTo" name="filterLeverageTo" type="text"></div>
+          <div class="filterSlider" id="filterLeverage"><div class="bar" id="filterLeverageBar"><div class="barRange" id="filterLeverageBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterLeverageHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterLeverageHandleRight" style="left: 315px;"></div></div></div>
+
+          Прибыль в месяц, %
+          <div class="filterLabel" id="filterWeekGrowLabel"><input id="filterWeekGrowFrom" name="filterWeekGrowFrom" type="text"><text>-</text><input id="filterWeekGrowTo" name="filterWeekGrowTo" type="text"></div>
+          <div class="filterSlider" id="filterWeekGrow"><div class="bar" id="filterWeekGrowBar"><div class="barRange" id="filterWeekGrowBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterWeekGrowHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterWeekGrowHandleRight" style="left: 315px;"></div></div></div>
+
+          Максимальная просадка, %
+          <div class="filterLabel" id="filterMaxDownLabel"><input id="filterMaxDownFrom" name="filterMaxDownFrom" type="text"><text>-</text><input id="filterMaxDownTo" name="filterMaxDownTo" type="text"></div>
+          <div class="filterSlider red" id="filterMaxDown"><div class="bar" id="filterMaxDownBar"><div class="barRange" id="filterMaxDownBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterMaxDownHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterMaxDownHandleRight" style="left: 315px;"></div></div></div>
+
+          Прибыльных сделок, %
+          <div class="filterLabel" id="filterWinLabel"><input id="filterWinFrom" name="filterWinFrom" type="text"><text>-</text><input id="filterWinTo" name="filterWinTo" type="text"></div>
+          <div class="filterSlider" id="filterWin"><div class="bar" id="filterWinBar"><div class="barRange" id="filterWinBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterWinHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterWinHandleRight" style="left: 315px;"></div></div></div>
+
+          Начальный депозит, $
+          <div class="filterLabel" id="filterDepositLabel"><input id="filterDepositFrom" name="filterDepositFrom" type="text"><text>-</text><input id="filterDepositTo" name="filterDepositTo" type="text"></div>
+          <div class="filterSlider" id="filterDeposit"><div class="bar" id="filterDepositBar"><div class="barRange" id="filterDepositBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterDepositHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterDepositHandleRight" style="left: 315px;"></div></div></div>
+
+          Недель торгует
+          <div class="filterLabel" id="filterWeeksLabel"><input id="filterWeeksFrom" name="filterWeeksFrom" type="text"><text>-</text><input id="filterWeeksTo" name="filterWeeksTo" type="text"></div>
+          <div class="filterSlider" id="filterWeeks"><div class="bar" id="filterWeeksBar"><div class="barRange" id="filterWeeksBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterWeeksHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterWeeksHandleRight" style="left: 315px;"></div></div></div>
+
+          Сделок в неделю 
+          <div class="filterLabel" id="filterTradesWeekLabel"><input id="filterTradesWeekFrom" name="filterTradesWeekFrom" type="text"><text>-</text><input id="filterTradesWeekTo" name="filterTradesWeekTo" type="text"></div>
+          <div class="filterSlider" id="filterTradesWeek"><div class="bar" id="filterTradesWeekBar"><div class="barRange" id="filterTradesWeekBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterTradesWeekHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterTradesWeekHandleRight" style="left: 315px;"></div></div></div>
+
+          Подписчиков
+          <div class="filterLabel" id="filterSubscribesLabel"><input id="filterSubscribesFrom" name="filterSubscribesFrom" type="text"><text>-</text><input id="filterSubscribesTo" name="filterSubscribesTo" type="text"></div>
+          <div class="filterSlider" id="filterSubscribes"><div class="bar" id="filterSubscribesBar"><div class="barRange" id="filterSubscribesBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterSubscribesHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterSubscribesHandleRight" style="left: 315px;"></div></div></div>
+
+          Стоимость подписки, USD
+          <div class="filterLabel" id="filterPriceLabel"><input id="filterPriceFrom" name="filterPriceFrom" type="text"><text>-</text><input id="filterPriceTo" name="filterPriceTo" type="text"></div>
+          <div class="filterSlider" id="filterPrice"><div class="bar" id="filterPriceBar"><div class="barRange" id="filterPriceBarRange" style="left: -6px; width: 327px;"></div><div class="handle left" id="filterPriceHandleLeft" style="left: -12px;"></div><div class="handle right" id="filterPriceHandleRight" style="left: 315px;"></div></div></div>
+
+          <div class="control">
+              <input id="filterReset" type="hidden" name="a[reset]">
+            <input class="link" type="button" name="a[reset]" onclick="$('filterReset').value = 'reset';this.form.submit()" value="Сбросить">
+            <input type="submit" name="a[filter]" value="Поиск">
+          </div>
+
+        </form>
+      </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //--- init params
+    var filters =
+        {
+        "filterLeverage":[0, 500, 0, 500, 10], // currentFrom, currentTo, min, max, step
+        "filterWeekGrow":[0, 100, 0, 100, 10],
+        "filterMaxDown":[0, 100, 0, 100, 10],
+        "filterWin":[0, 100, 0, 100, 10],
+        "filterDeposit":[0, 50000, 0, 50000, 100],
+        "filterWeeks":[0, 200, 0, 200, 1],
+        "filterTradesWeek":[0, 500, 0, 500, 1],
+        "filterSubscribes":[0, 1000, 0, 1000, 10],
+        "filterPrice": [0, 1000, 0, 1000, 10]
+        };
+</script>
+    </div>
+    <div class="signalsTabs" style="width:1px;height:18px;margin: 5px -1px 0 0;float:right;border-right:solid 1px #dadada;">&nbsp;</div>
+    <div class="signalsTabs popup" style="padding: 0 10px;margin: 0 -1px 0 0;float:right;">
+      <span>Сортировка:</span><a href="/ru/signals/mt4?orderby=quality&amp;dir=up"><span>рейтинг</span> ↓</a>
+      <div class="popup">
+        <div class="items"><a class="disabled"><span>рейтинг</span></a><a href="/ru/signals/mt4?orderby=gain"><span>прирост</span></a><a href="/ru/signals/mt4?orderby=equity"><span>средства</span></a><a href="/ru/signals/mt4?orderby=pips"><span>pips</span></a><a href="/ru/signals/mt4?orderby=slippage"><span>проскальзывание</span></a><a href="/ru/signals/mt4?orderby=date"><span>дата добавления</span></a><a href="/ru/signals/mt4?orderby=price"><span>стоимость</span></a><a href="/ru/signals/mt4?orderby=subscribers"><span>подписчики</span></a>
+        </div>
+      </div>
+      </div>
+    <div style="clear:right"></div>
+  </div>
+    <div class="signalsBlock">
+        <div class="topBlock">
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/74251" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="1, 0, 0, 0, 0, 0, 0, 1, 3, 7, 6, 9, 10, 12, 19, 26, 39, 27, 38, 41, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/74251" title="'Nighthawk ECN Armada EURUSD' от Thomas Gruening">Nighthawk ECN Armada EURUSD</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 33%"><span>1 114%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>34</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>55</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>454</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>88%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.15</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>39%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/106890" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 17, 23, 25, 27, 28, 29, 29, 30, 32, 35, 35, 36, 37, 38, 40, 45, 51, 56, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/106890" title="'MAGICSIGNALS TWO' от OLA SAID ABD ELGHAFAR">MAGICSIGNALS TWO</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: -41%"><span>2 848%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>12</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>23</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>789</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>99%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.96</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>44%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/89867" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 16, 18, 19, 19, 20, 22, 24, 26, 27, 28, 29, 34, 33, 38, 42, 47, 50, 54, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/89867" title="'FOREXSTAY LIGHT 1H' от SAAD ELDIN AHMED SAAD">FOREXSTAY LIGHT 1H</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: -37%"><span>2 290%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>104</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>38</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>1296</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>98%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>4.07</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>42%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/74480" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 1, 2, 3, 4, 5, 8, 10, 15, 20, 27, 34, 22, 28, 36, 46, 53, 50, 50, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/74480" title="'Nighthawk ECN Armada USDCHF' от Thomas Gruening">Nighthawk ECN Armada USDCHF</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 10%"><span>779%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>12</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>35</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>243</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>89%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.88</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>31%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/126288" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 0, 1, 3, 5, 9, 12, 16, 18, 18, 21, 22, 24, 27, 27, 29, 36, 44, 52, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/126288" title="'CB06141' от Capital Brothers Ltd.">CB06141</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 10%"><span>344%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>71</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>65</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>1917</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>79%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>3.04</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>5%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/107938" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 0, 0, 0, 2, 6, 11, 18, 20, 22, 26, 32, 31, 37, 43, 43, 46, 55, 52, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="25.00 USD">25.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/107938" title="'All Profit 01' от Petr Vegh">All Profit 01</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 16%"><span>795%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>51</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>29</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>272</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>83%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.64</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>21%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/120181" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 2, 3, 8, 13, 15, 22, 26, 31, 34, 36, 40, 42, 48, 45, 52, 56, 54, 56, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/120181" title="'EA ATS MAXI' от Pavel Efimov">EA ATS MAXI</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 21%"><span>517%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>46</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>14</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>356</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>69%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.89</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>27%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/124603" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 1, 4, 7, 9, 11, 13, 15, 17, 20, 21, 27, 30, 32, 34, 40, 44, 45, 49, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/124603" title="'ATS FX RAY' от Pavel Efimov">ATS FX RAY</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 50%"><span>369%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>10</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>12</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>184</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>73%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.70</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>34%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/126290" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 2, 2, 5, 6, 9, 12, 14, 17, 25, 28, 32, 33, 35, 39, 43, 48, 54, 56, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/126290" title="'CB06143' от Capital Brothers Ltd.">CB06143</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 3%"><span>239%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>9</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>62</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>813</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>69%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>3.95</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>4%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/110126" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="2, 0, -1, -2, 4, 18, 26, 26, 29, 28, 29, 29, 38, 46, 42, 44, 45, 51, 53, 36, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="49.00 USD">49.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/110126" title="'SLOWCAW' от ChangMing Chen">SLOWCAW</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: -12%"><span>205%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>8</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>19</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>363</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>39%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>1.63</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>28%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+        </div>
+        <div class="topBlock">
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/67474" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="1, 0, 0, 0, 0, 0, 0, 0, -1, 0, 8, 7, 4, 4, 5, 9, 27, 35, 49, 53, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/67474" title="'Gio IC Profit' от Giovanni Raneri">Gio IC Profit</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: -2%"><span>139%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>12</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>70</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>1202</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>65%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>1.37</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>15%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/125799" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 0, 0, 1, 2, 3, 5, 8, 9, 13, 20, 22, 28, 31, 38, 44, 47, 56, 54, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="33.00 USD">33.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/125799" title="'Fundamental only' от Khin Liong Chen">Fundamental only</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 13%"><span>1 645%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>21</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>51</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>289</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>89%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>6.24</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>26%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/84299" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 1, 3, 8, 10, 15, 9, 14, 18, 21, 25, 28, 30, 35, 37, 39, 43, 48, 49, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="30.00 USD">30.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/84299" title="'Night Hunter' от Aliaksandr Leanovich">Night Hunter</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 14%"><span>133%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>9</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>38</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>415</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>75%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.61</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>18%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/63128" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="4, 0, 2, 0, 5, 3, 5, 10, 12, 12, 17, 21, 24, 28, 34, 35, 38, 39, 44, 50, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/63128" title="'DSPtradercom' от Michal Slobodzian">DSPtradercom</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 9%"><span>128%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>19</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>46</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>1111</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>77%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>2.10</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>26%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/45686" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 7, 12, 19, 13, 15, 20, 25, 27, 33, 38, 40, 45, 43, 41, 46, 50, 55, 33, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/45686" title="'GoWinCrossNC' от hao wu">GoWinCrossNC</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: -33%"><span>131%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>9</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>76</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>2781</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>69%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>1.27</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>42%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/101817" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 1, 3, 5, 6, 6, 17, 16, 16, 18, 18, 24, 23, 34, 45, 47, 46, 54, 32, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="30.00 USD">30.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/101817" title="'A2 QQ1686018008' от jiaye chen">A2 QQ1686018008</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: -19%"><span>102%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>15</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>20</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>420</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>77%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>1.47</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>29%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/122417" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 0, 1, 3, 5, 7, 11, 13, 14, 16, 19, 23, 29, 33, 36, 42, 48, 51, 56, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="25.00 USD">25.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/122417" title="'DELTA' от Vagor Mikilyan">DELTA</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 16%"><span>1 247%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>78</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>42</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>109</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>90%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>8.91</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>8%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/1199" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 47, 48, 47, 43, 42, 37, 34, 33, 37, 41, 45, 48, 43, 45, 45, 47, 50, 57, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="29.00 USD">29.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/1199" title="'Wallstreet FOREX Robot OFFICIAL' от Lachezar Krastev">Wallstreet FOREX Robot OFFICIAL</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 17%"><span>728%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>0</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>232</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>455</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>78%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>1.71</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd class="red"><span>31%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/123218" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 3, 4, 5, 7, 9, 14, 16, 20, 25, 27, 27, 31, 36, 41, 40, 45, 49, 52, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="20.00 USD">20.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/123218" title="'Gemi' от David Kurba">Gemi</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 8%"><span>893%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>113</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>39</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>550</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>89%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>4.74</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>8%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+            <div><div class="signal">
+  <div class="logo">
+    <div class="signalAvatarW signals_states">
+      <a class="signalAvatar bg" href="https://www.mql5.com/ru/signals/112867" rel="nofollow">
+        <canvas width="58" height="58"></canvas>
+        <input type="hidden" value="0, 0, 1, 1, 3, 5, 6, 9, 9, 16, 19, 22, 26, 30, 33, 37, 40, 46, 50, 55, ">
+      </a>
+      <span class="ico_state real bg ssl_market" title="Реальный счет"></span>
+    </div>
+    <span class="price" title="23.00 USD">23.00</span>
+  </div>
+  <div class="details">
+    <div class="title signals_states">
+      <span class="heading">
+        <a href="https://www.mql5.com/ru/signals/112867" title="'Real V' от Aliaksei Malikau">Real V</a>
+      </span>
+      <span class="tools">
+      </span>
+    </div>
+    <dl class="numbers">
+      <dt class="first"><span>Прирост</span></dt>
+      <dd class="first blue" title="Прибыль в&nbsp;месяц: 13%"><span>153%</span></dd>
+      <dt><span>Подписчики</span></dt>
+      <dd><span>11</span></dd>
+      <dt><span>Недели</span></dt>
+      <dd><span>29</span></dd>
+      <dt><span>Трейды</span></dt>
+      <dd><span>406</span></dd>
+      <dt><span>Прибыльные</span></dt>
+      <dd><span>87%</span></dd>
+      <dt><span>Профит фактор</span></dt>
+      <dd><span>4.30</span></dd>
+      <dt><span>Макс. просадка</span></dt>
+      <dd><span>11%</span></dd>
+    </dl>
+  </div>
+</div>
+</div>
+        </div>
+    </div>
+  <div style="clear:left;"></div>
+  <div style="padding: 10px;border-top:1px solid #DADADA;">
+  <span class="paginatorEx">←<span class="arrow" title="Ctrl + ←">предыдущая</span><a class="selected" href="/ru/signals/mt4" rel="nofollow">1</a><a href="/ru/signals/mt4/page2" rel="nofollow">2</a><a href="/ru/signals/mt4/page3" rel="nofollow">3</a><a href="/ru/signals/mt4/page4" rel="nofollow">4</a><a href="/ru/signals/mt4/page5" rel="nofollow">5</a><a href="/ru/signals/mt4/page6" rel="nofollow">6</a><a href="/ru/signals/mt4/page7" rel="nofollow">7</a><a href="/ru/signals/mt4/page8" rel="nofollow">8</a><a href="/ru/signals/mt4/page56" rel="nofollow">...</a><a href="/ru/signals/mt4/page103" rel="nofollow">103</a><a class="arrow" href="/ru/signals/mt4/page2" rel="next" title="Ctrl + →">следующая</a>→
+            <script type="text/javascript">
+                if(!window.paginatorOnLoad)
+                    {
+                        mqGlobal.AddOnLoad(function()
+                            {
+                                setHotKeysPaginator
+                                (
+                                '',
+                                '',
+                                '/ru/signals/mt4/page2'
+                                );
+                            });
+                        //--- don't attach several times
+                        window.paginatorOnLoad = true;
+                    }
+            </script></span>
+  </div>
+  <div class="clear-fix" style="padding-top: 5px;"></div>
+  <p class="disclaimer">При подписке на сигналы подписчик берет на себя все риски исполнения. Историческая статистика не гарантирует будущих прибылей.</p>
+  <div class="clear-fix"></div>
+</div>
+
+<script type="text/javascript">
+  mqGlobal.AddOnReady(function ()
+    {
+    Signals.RenderAvatars();
+    });
+  mqGlobal.AddOnLoad(function ()
+    {
+    //--- Start signals filter slider bar
+    SliderBar('window-filter');
+    //---
+    new ClickPopup().Init('brokerFilter', 'brokerFilterBody', 'filter_broker',365);
+    });
+  window.BrokerFilterSelect = function (value) {
+    if (value && value.length > 0)
+      document.location = document.location.pathname + "?filter_broker=" + value;
+  };
+  window.ApplyBrokerFilter = function (broker) {
+    document.brokerFilter.filter_broker.value = broker;
+    document.brokerFilter.submit();
+  };
+</script>
+
+    </div>
+
+    <div class="footer">
+      <div class="shadow"></div>
+      
+      <div class="down"></div>
+      
+      <div class="caption">Присоединяйся к нам — скачай MetaTrader&nbsp;5!</div>
+
+      <ul class="download">
+      <li class="windows"><a href="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe?utm_campaign=MQL5.community" onclick="traceClickAsync(this,'click','click_download_mt5_windows_footer','https%3A%2F%2Fdownload.mql5.com%2Fcdn%2Fweb%2Fmetaquotes.software.corp%2Fmt5%2Fmt5setup.exe','ru');" title="Скачать MetaTrader 5 для Windows бесплатно!"><span>Windows</span></a></li>
+      <li class="ios"><a href="https://download.mql5.com/cdn/mobile/mt5/ios?hl=ru&amp;utm_campaign=MQL5.community" target="_blank" rel="nofollow" onclick="traceClickAsync(this,'click','click_download_mt5_ios_footer','https%3a%2f%2fdownload.mql5.com%2fcdn%2fmobile%2fmt5%2fios%3fhl%3dru%26amp%3butm_campaign%3dMQL5.community','ru')" title="Скачать MetaTrader 5 для iPhone бесплатно!"><span>iPhone/iPad</span></a></li>
+      <li class="macos"><a href="/ru/articles/619" target="_blank" onclick="traceClickAsync(this,'click','click_article_mt5_on_macos_footer','https%3A%2F%2Fwww.mql5.com%2Fru%2Farticles%2F619','ru')" title="Как установить MetaTrader 5 на Mac OS"><span>Mac OS</span></a></li>
+      <li class="android"><a href="https://download.mql5.com/cdn/mobile/mt5/android?hl=ru&amp;utm_campaign=MQL5.community" target="_blank" rel="nofollow" onclick="traceClickAsync(this,'click','click_download_mt5_android_footer','https%3a%2f%2fdownload.mql5.com%2fcdn%2fmobile%2fmt5%2fandroid%3fhl%3dru%26utm_campaign%3dMQL5.community','ru');" title="Скачать MetaTrader 5 Android на Google Play бесплатно!"><span>Android</span></a></li>
+      <li class="linux"><a href="/ru/articles/625" target="_blank" onclick="traceClickAsync(this,'click','click_article_mt5_on_linux_footer','https%3A%2F%2Fwww.mql5.com%2Fru%2Farticles%2F625','ru')" title="Как установить MetaTrader 5 на Linux"><span>Linux</span></a></li>
+      </ul>
+      <div class="links">
+      <a href="/ru/docs">Язык стратегий MQL5</a> |
+      <a href="/ru/code">Библиотека исходного кода</a> |
+
+      <a href="/ru/articles/100">Как написать эксперт или индикатор</a> |
+      <a href="/ru/job">Заказать разработку эксперта</a>
+      </div>
+
+      <div class="links">
+      <a href="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5setup.exe?utm_campaign=MQL5.community" rel="nofollow">Скачать MetaTrader 5</a> |
+      <a href="http://www.metatrader5.com/ru">Торговая платформа MetaTrader 5</a> |
+      <a href="/ru/market">Магазин приложений</a> |
+      <a href="https://cloud.mql5.com/">MQL5 Cloud Network</a>
+      </div>
+
+      <div class="links">
+      <a href="/ru/about">О проекте</a> |
+      <a href="/ru/wall">История сайта</a> | <a href="/ru/about/terms">Условия использования</a> |
+      <a href="/ru/about/privacy">Политика конфиденциальности</a> | <a href="/ru/contact">Контакты</a>
+      </div>
+
+      <div class="copyright">Copyright 2000-2015, MQL5 Ltd.</div>
+    </div>
+</div>
+
+<script src="https://c.mql5.com/js/all.74969961d38568aa910d2b54ecbf62fb.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    mqGlobal.AddOnLoad(function(){Mql5Cookie.init('mql5.com','55E9FEC0-C809',null,0);});
+    var siteUpdates = new SiteUpdates('/ru/updates',10,'ru',[13],1441398464,0);
+  if(Attach)
+    Attach.setAcceptFilter(".gif,.png,.jpg,.jpeg,.zip,.txt,.log,.mqh,.ex5,.mq5,.mq4,.ex4,.mt5,.set,.tpl,.flv");
+</script>
+<script type="text/javascript">
+</script>
+
+
+<!-- Generated in 219 ms --><div class="fl_trc"><embed type="application/x-shockwave-flash" src="https://www.mql5.com/swf/permanent.swf?v=1" id="flash_permanent" name="flash_permanent" allowscriptaccess="always" allowfullscreen="false" flashvars="callback=Mql5Cookie.onFlashLoad" bgcolor="#fff" width="1" height="1"></div><script id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i.toString(); } else { d.textContent=i.toString(); } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }}catch(e){}</script><div></div></body></html>

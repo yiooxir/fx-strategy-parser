@@ -4,9 +4,16 @@ http://catethysis.ru/node-js-cheerio-parser/
 import express from 'express';
 import request from 'request';
 import cheerio from 'cheerio';
+import shedule from 'node-schedule';
 
-/* store requests <async> */
-const queryStorage = [];
+
+function parse() {
+
+}
+
+schedule.scheduleJob('42 * * * *', function(){
+    console.log('The answer to life, the universe, and everything!');
+});
 
 
 request('https://www.mql5.com/ru/signals/mt4', function(err, res, body) {
